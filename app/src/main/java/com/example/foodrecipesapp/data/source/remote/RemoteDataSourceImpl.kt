@@ -1,0 +1,16 @@
+package com.example.foodrecipesapp.data.source.remote
+
+import com.example.foodrecipesapp.data.api.FoodApi
+import com.example.foodrecipesapp.data.dto.FoodResponse
+import retrofit2.Response
+import javax.inject.Inject
+
+class RemoteDataSourceImpl @Inject constructor(
+    private val api:FoodApi
+) : RemoteDataSource{
+
+
+    override suspend fun getFoodRecipesWithQueries(queries: Map<String, String>): Response<FoodResponse> =
+        api.getFoodRecipesWithQueries(queries)
+
+}
