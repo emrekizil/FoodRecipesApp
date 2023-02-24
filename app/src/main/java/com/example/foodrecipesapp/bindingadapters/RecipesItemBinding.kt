@@ -18,6 +18,7 @@ class RecipesItemBinding {
                 imageUrl
             ){
                 crossfade(600)
+                error(R.drawable.ic_placeholder_image)
 
             }
         }
