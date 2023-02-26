@@ -1,4 +1,4 @@
-package com.example.foodrecipesapp.ui.fragments
+package com.example.foodrecipesapp.ui.fragments.recipes
 
 import android.os.Bundle
 import android.util.Log
@@ -8,14 +8,16 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.viewModels
+import androidx.navigation.NavArgs
+import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.foodrecipesapp.BuildConfig.API_KEY
+import com.example.foodrecipesapp.R
 import com.example.foodrecipesapp.data.NetworkResult
 import com.example.foodrecipesapp.databinding.FragmentRecipesBinding
 import com.example.foodrecipesapp.ui.MainViewModel
 import com.example.foodrecipesapp.ui.adapters.RecipesAdapter
 import com.example.foodrecipesapp.util.observeOnce
-import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -25,6 +27,8 @@ class RecipesFragment : Fragment() {
     private val viewModel by viewModels<MainViewModel>()
     private val recipesViewModel by viewModels<RecipesViewModel> ()
     private val adapter by lazy { RecipesAdapter() }
+
+    private val args by navArgs<RecipesFragmentArgs>()
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -39,12 +43,15 @@ class RecipesFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         setupRecyclerView()
         readDatabase()
+        binding.recipesFab.setOnClickListener {
+            navigateToBottomSheet()
+        }
     }
 
     private fun readDatabase() {
 
         viewModel.readRecipes.observeOnce(viewLifecycleOwner){
-            if(it.isNotEmpty()){
+            if(it.isNotEmpty() && !args.backFromBottomSheet){
                 Log.d("RecipesFragment","read database called")
                 adapter.setData(it[0].foodRecipe)
                 hideShimmerEffect()
@@ -95,6 +102,9 @@ class RecipesFragment : Fragment() {
     }
     private fun hideShimmerEffect(){
         binding.recipesRv.hideShimmer()
+    }
+    private fun navigateToBottomSheet(){
+        findNavController().navigate(R.id.action_recipesFragment_to_recipesBottomSheetFragment)
     }
 
 

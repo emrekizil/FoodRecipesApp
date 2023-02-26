@@ -10,5 +10,12 @@ class Constants {
         const val QUERY_FILL_INGREDIENTS ="fillIngredients"
 
 
+        const val DEFAULT_MEAL_TYPE ="main course"
+        const val DEFAULT_DIET_TYPE = "gluten free"
+        const val DEFAULT_RECIPES_NUMBER = "50"
+
+        const val PREFERENCES_NAME ="foody_preferences"
+
+
     }
 }
