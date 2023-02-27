@@ -2,6 +2,7 @@ package com.example.foodrecipesapp.util
 
 class Constants {
     companion object{
+        const val QUERY_SEARCH ="query"
         const val QUERY_NUMBER ="number"
         const val QUERY_API_KEY ="apiKey"
         const val QUERY_TYPE ="type"
