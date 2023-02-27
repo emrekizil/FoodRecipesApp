@@ -25,6 +25,7 @@ class DataStoreRepository @Inject constructor(@ApplicationContext private val ap
         val selectedMealTypeId = intPreferencesKey("mealTypeId")
         val selectedDietType = stringPreferencesKey("dietType")
         val selectedDietTypeId = intPreferencesKey("dietTypeId")
+        val networkBackOnline = booleanPreferencesKey("backOnline")
     }
 
     private val dataStore : DataStore<Preferences> = appContext.dataStore
@@ -37,6 +38,15 @@ class DataStoreRepository @Inject constructor(@ApplicationContext private val ap
             preferences[PreferencesKeys.selectedDietTypeId] = dietTypeId
         }
     }
+
+    suspend fun saveNetworkStatus(networkStatus:Boolean){
+        dataStore.edit { preferences->
+            preferences[PreferencesKeys.networkBackOnline] = networkStatus
+        }
+    }
+
+
+
     val readMealAndDietType : Flow<MealAndDietType> = dataStore.data
         .catch { e->
             if (e is IOException){
@@ -54,6 +64,18 @@ class DataStoreRepository @Inject constructor(@ApplicationContext private val ap
             )
         }
 
+    val readNetworkStatus : Flow<Boolean> = dataStore.data
+        .catch { e ->
+            if(e is IOException){
+                emit(emptyPreferences())
+            }else{
+                throw  e
+            }
+        }
+        .map { preferences ->
+            val networkStatus = preferences[PreferencesKeys.networkBackOnline] ?: false
+            networkStatus
+        }
 }
 
 data class MealAndDietType(
