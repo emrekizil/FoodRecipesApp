@@ -1,15 +1,31 @@
 package com.example.foodrecipesapp.bindingadapters
-
+import android.util.Log
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
 import androidx.databinding.BindingAdapter
+import androidx.navigation.findNavController
 import coil.load
 import com.example.foodrecipesapp.R
+import com.example.foodrecipesapp.ui.fragments.recipes.RecipesFragmentDirections
 
 class RecipesItemBinding {
     companion object {
+
+        @BindingAdapter("onRecipeClickListener")
+        @JvmStatic
+        fun onRecipeClickListener(recipeRowLayout:ConstraintLayout,result:com.example.foodrecipesapp.data.dto.Result){
+            recipeRowLayout.setOnClickListener {
+                try {
+                    val action = RecipesFragmentDirections.actionRecipesFragmentToDetailsActivity(result)
+                    recipeRowLayout.findNavController().navigate(action)
+                }catch (e:Exception){
+                    Log.d("ClickListener",e.message.toString())
+                }
+            }
+        }
 
         @BindingAdapter("loadImage")
         @JvmStatic

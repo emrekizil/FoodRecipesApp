@@ -1,8 +1,13 @@
 package com.example.foodrecipesapp.data.dto
 
 
+import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
+import kotlinx.android.parcel.RawValue
+import kotlinx.parcelize.Parcelize
 
+
+@Parcelize
 data class ExtendedIngredient(
     @SerializedName("aisle")
     val aisle: String,
@@ -14,8 +19,6 @@ data class ExtendedIngredient(
     val id: Int,
     @SerializedName("image")
     val image: String,
-    @SerializedName("measures")
-    val measures: Measures,
     @SerializedName("meta")
     val meta: List<String>,
     @SerializedName("name")
@@ -28,4 +31,4 @@ data class ExtendedIngredient(
     val originalName: String,
     @SerializedName("unit")
     val unit: String
-)
+):Parcelable

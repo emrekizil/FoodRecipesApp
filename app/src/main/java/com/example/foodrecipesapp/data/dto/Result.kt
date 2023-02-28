@@ -1,13 +1,15 @@
 package com.example.foodrecipesapp.data.dto
-
-
+import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
 
+import kotlinx.android.parcel.RawValue
+import kotlinx.parcelize.Parcelize
+
+
+@Parcelize
 data class Result(
     @SerializedName("aggregateLikes")
     val aggregateLikes: Int,
-    @SerializedName("analyzedInstructions")
-    val analyzedInstructions: List<AnalyzedInstruction>,
     @SerializedName("cheap")
     val cheap: Boolean,
     @SerializedName("cookingMinutes")
@@ -15,7 +17,7 @@ data class Result(
     @SerializedName("creditsText")
     val creditsText: String,
     @SerializedName("cuisines")
-    val cuisines: List<Any>,
+    val cuisines:@RawValue  List<Any>,
     @SerializedName("dairyFree")
     val dairyFree: Boolean,
     @SerializedName("diets")
@@ -23,7 +25,7 @@ data class Result(
     @SerializedName("dishTypes")
     val dishTypes: List<String>,
     @SerializedName("extendedIngredients")
-    val extendedIngredients: List<ExtendedIngredient>,
+    val extendedIngredients:@RawValue  List<ExtendedIngredient>,
     @SerializedName("gaps")
     val gaps: String,
     @SerializedName("glutenFree")
@@ -42,10 +44,8 @@ data class Result(
     val lowFodmap: Boolean,
     @SerializedName("missedIngredientCount")
     val missedIngredientCount: Int,
-    @SerializedName("missedIngredients")
-    val missedIngredients: List<MissedIngredient>,
     @SerializedName("occasions")
-    val occasions: List<Any>,
+    val occasions:@RawValue  List<Any>,
     @SerializedName("preparationMinutes")
     val preparationMinutes: Int,
     @SerializedName("pricePerServing")
@@ -67,11 +67,11 @@ data class Result(
     @SerializedName("title")
     val title: String,
     @SerializedName("unusedIngredients")
-    val unusedIngredients: List<Any>,
+    val unusedIngredients: @RawValue List<Any>,
     @SerializedName("usedIngredientCount")
     val usedIngredientCount: Int,
     @SerializedName("usedIngredients")
-    val usedIngredients: List<Any>,
+    val usedIngredients: @RawValue  List<Any>,
     @SerializedName("vegan")
     val vegan: Boolean,
     @SerializedName("vegetarian")
@@ -82,4 +82,4 @@ data class Result(
     val veryPopular: Boolean,
     @SerializedName("weightWatcherSmartPoints")
     val weightWatcherSmartPoints: Int
-)
+) : Parcelable
