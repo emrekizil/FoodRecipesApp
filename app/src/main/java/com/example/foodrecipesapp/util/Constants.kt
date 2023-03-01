@@ -2,6 +2,8 @@ package com.example.foodrecipesapp.util
 
 class Constants {
     companion object{
+        const val BASE_IMG_URL = "https://spoonacular.com/cdn/ingredients_100x100/"
+
         const val QUERY_SEARCH ="query"
         const val QUERY_NUMBER ="number"
         const val QUERY_API_KEY ="apiKey"

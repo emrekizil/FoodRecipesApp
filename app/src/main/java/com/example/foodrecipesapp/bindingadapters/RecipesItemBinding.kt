@@ -10,6 +10,7 @@ import androidx.navigation.findNavController
 import coil.load
 import com.example.foodrecipesapp.R
 import com.example.foodrecipesapp.ui.fragments.recipes.RecipesFragmentDirections
+import org.jsoup.Jsoup
 
 class RecipesItemBinding {
     companion object {
@@ -74,6 +75,15 @@ class RecipesItemBinding {
                         )
                     }
                 }
+            }
+        }
+
+        @BindingAdapter("parseHTML")
+        @JvmStatic
+        fun parseHtml(textView: TextView,description:String?){
+            if(description!=null){
+                val parsedDescription = Jsoup.parse(description).text()
+                textView.text = parsedDescription
             }
         }
 
