@@ -5,7 +5,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.databinding.BindingAdapter
 import com.example.foodrecipesapp.data.NetworkResult
-import com.example.foodrecipesapp.data.database.RecipesEntity
+import com.example.foodrecipesapp.data.database.entities.RecipesEntity
 import com.example.foodrecipesapp.data.dto.FoodResponse
 
 class RecipesBinding {

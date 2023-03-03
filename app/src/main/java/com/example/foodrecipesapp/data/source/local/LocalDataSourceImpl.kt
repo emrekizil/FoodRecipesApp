@@ -1,7 +1,8 @@
 package com.example.foodrecipesapp.data.source.local
 
 import com.example.foodrecipesapp.data.database.RecipesDao
-import com.example.foodrecipesapp.data.database.RecipesEntity
+import com.example.foodrecipesapp.data.database.entities.FavoritesEntity
+import com.example.foodrecipesapp.data.database.entities.RecipesEntity
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
@@ -12,11 +13,24 @@ class LocalDataSourceImpl @Inject constructor(
     override suspend fun insert(recipesEntity: RecipesEntity){
         recipesDao.insert(recipesEntity)
     }
-    override suspend fun delete(recipesEntity: RecipesEntity){
-        recipesDao.delete(recipesEntity)
-    }
 
     override fun getRecipes():Flow<List<RecipesEntity>>{
         return recipesDao.getRecipes()
+    }
+
+    override suspend fun insertFavoriteRecipe(favoritesEntity: FavoritesEntity) {
+        recipesDao.insertFavoriteRecipe(favoritesEntity)
+    }
+
+    override suspend fun deleteFavoriteRecipe(favoritesEntity: FavoritesEntity) {
+        recipesDao.deleteFavoriteRecipe(favoritesEntity)
+    }
+
+    override suspend fun deleteAllFavoriteRecipes() {
+        recipesDao.deleteAllFavoriteRecipes()
+    }
+
+    override fun getFavoriteRecipes(): Flow<List<FavoritesEntity>> {
+        return recipesDao.getFavoriteRecipes()
     }
 }
