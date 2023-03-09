@@ -3,8 +3,11 @@ package com.example.foodrecipesapp.ui.fragments
 import android.os.Binder
 import android.os.Bundle
 import android.view.*
+import androidx.core.view.MenuHost
+import androidx.core.view.MenuProvider
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Lifecycle
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.foodrecipesapp.R
 import com.example.foodrecipesapp.databinding.FragmentFavoriteRecipesBinding
@@ -17,11 +20,9 @@ import dagger.hilt.android.AndroidEntryPoint
 class FavoriteRecipesFragment : Fragment() {
 
     private lateinit var binding:FragmentFavoriteRecipesBinding
-
-    //private val adapter = FavoriteRecipesAdapter(requireActivity())
     private val viewModel by viewModels<MainViewModel>()
     private lateinit var adapter :FavoriteRecipesAdapter
-
+    private lateinit var menuHost: MenuHost
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -38,27 +39,22 @@ class FavoriteRecipesFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setupRecyclerView()
-        setHasOptionsMenu(true)
-       // observeDatabase()
+        menuHost = requireActivity()
+        menuHost.addMenuProvider(object :MenuProvider{
+            override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
+                menuInflater.inflate(R.menu.favorite_recipes_menu,menu)
+            }
+
+            override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
+                if (menuItem.itemId==R.id.deleteAllFavoriteRecipesMenu){
+                    viewModel.deleteAllFavoriteRecipes()
+                    showSnackbar("All recipes removed")
+                }
+                return true
+            }
+        },viewLifecycleOwner,Lifecycle.State.RESUMED)
     }
 
-    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        inflater.inflate(R.menu.favorite_recipes_menu,menu)
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        if (item.itemId==R.id.deleteAllFavoriteRecipesMenu){
-            viewModel.deleteAllFavoriteRecipes()
-            showSnackbar("All recipes removed")
-        }
-        return super.onOptionsItemSelected(item)
-    }
-
-    private fun observeDatabase() {
-        viewModel.readFavoriteRecipes.observe(viewLifecycleOwner){
-            adapter.setData(it)
-        }
-    }
 
     private fun setupRecyclerView(){
         binding.adapter = adapter

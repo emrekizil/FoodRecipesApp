@@ -2,6 +2,7 @@ package com.example.foodrecipesapp.data.source.remote
 
 import com.example.foodrecipesapp.data.api.FoodApi
 import com.example.foodrecipesapp.data.dto.FoodResponse
+import com.example.foodrecipesapp.data.dto.JokeResponse
 import retrofit2.Response
 import javax.inject.Inject
 
@@ -15,5 +16,8 @@ class RemoteDataSourceImpl @Inject constructor(
 
     override suspend fun getFoodRecipesWithSearchQueries(searchQueries: Map<String, String>): Response<FoodResponse> =
         api.getFoodRecipesWithSearchQueries(searchQueries)
+
+    override suspend fun getFoodJoke(): Response<JokeResponse> =
+        api.getFoodJoke()
 
 }
