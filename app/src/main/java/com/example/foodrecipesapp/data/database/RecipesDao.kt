@@ -2,6 +2,7 @@ package com.example.foodrecipesapp.data.database
 
 import androidx.room.*
 import com.example.foodrecipesapp.data.database.entities.FavoritesEntity
+import com.example.foodrecipesapp.data.database.entities.FoodJokeEntity
 import com.example.foodrecipesapp.data.database.entities.RecipesEntity
 import kotlinx.coroutines.flow.Flow
 
@@ -15,7 +16,6 @@ interface RecipesDao {
     @Query("SELECT * FROM recipes_table ORDER BY id ASC")
     fun getRecipes(): Flow<List<RecipesEntity>>
 
-
     //Favorite Recipe
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertFavoriteRecipe(favoritesEntity: FavoritesEntity)
@@ -28,6 +28,12 @@ interface RecipesDao {
 
     @Query("SELECT * FROM favorite_recipes_table ORDER BY id ASC")
     fun getFavoriteRecipes():Flow<List<FavoritesEntity>>
+
+    //Food Joke
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insertFoodJoke(foodJokeEntity: FoodJokeEntity)
+    @Query("SELECT * FROM food_joke_table ORDER BY id ASC")
+    fun getFoodJoke():Flow<List<FoodJokeEntity>>
 
 
 

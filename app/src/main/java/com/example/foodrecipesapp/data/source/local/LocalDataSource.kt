@@ -1,6 +1,7 @@
 package com.example.foodrecipesapp.data.source.local
 
 import com.example.foodrecipesapp.data.database.entities.FavoritesEntity
+import com.example.foodrecipesapp.data.database.entities.FoodJokeEntity
 import com.example.foodrecipesapp.data.database.entities.RecipesEntity
 import kotlinx.coroutines.flow.Flow
 
@@ -13,6 +14,10 @@ interface LocalDataSource {
     suspend fun deleteAllFavoriteRecipes()
 
     fun getFavoriteRecipes():Flow<List<FavoritesEntity>>
+
+    suspend fun insertFoodJoke(foodJokeEntity: FoodJokeEntity)
+
+    fun getFoodJoke():Flow<List<FoodJokeEntity>>
 
 
 }
