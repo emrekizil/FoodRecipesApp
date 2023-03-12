@@ -20,9 +20,11 @@
             android:name=".ui.DetailsActivity"
             android:exported="false"
             android:theme="@style/DetailsActivityStyle"
+            android:screenOrientation="portrait"
             android:label="Details"/>
         <activity
             android:name=".ui.MainActivity"
+            android:screenOrientation="portrait"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
