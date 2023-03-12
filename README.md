@@ -1,5 +1,19 @@
 # FoodRecipesApp
+Food Recipes app that users can view, fav recipes, and share jokes. I work on improving app architecture.
+# Screenshots
 
+<p align="center">
+<img src="/previews/recipes_fragment.png" width="20%"/>
+<img src="/previews/bottom_sheet.png" width="20%"/>
+<img src="/previews/favorites_fragment.png" width="20%"/>
+<img src="/previews/joke_fragment.png" width="20%"/>
+</p>
+<p align="center">
+<img src="/previews/favorites_fragment_delete.png" width="20%"/>
+<img src="/previews/overview_fragment.png" width="20%"/>
+<img src="/previews/ingredients_fragment.png" width="20%"/>
+<img src="/previews/instructions_fragment.png" width="20%"/>
+</p>
 
 # Tech Stack & Open Source Libraries
 - Minimum SDK level 21
