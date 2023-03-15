@@ -82,7 +82,7 @@ class RecipesFragment : Fragment() , SearchView.OnQueryTextListener {
 
 
     private fun observeNetworkListener() {
-        lifecycleScope.launch {
+        lifecycleScope.launchWhenStarted {
             networkListener = NetworkListener()
             networkListener.checkNetworkAvailability(requireContext())
                 .collectLatest {status ->

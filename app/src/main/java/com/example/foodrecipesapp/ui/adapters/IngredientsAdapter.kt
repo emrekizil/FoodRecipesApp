@@ -19,10 +19,10 @@ class IngredientsAdapter : RecyclerView.Adapter<IngredientsAdapter.IngredientsVi
 
     class IngredientsViewHolder( private val binding: ItemIngredientsBinding):RecyclerView.ViewHolder(binding.root){
         companion object{
-            fun from(parent: ViewGroup) : IngredientsAdapter.IngredientsViewHolder {
+            fun from(parent: ViewGroup) : IngredientsViewHolder {
                 val layoutInflater = LayoutInflater.from(parent.context)
                 val binding = ItemIngredientsBinding.inflate(layoutInflater,parent,false)
-                return IngredientsAdapter.IngredientsViewHolder(binding)
+                return IngredientsViewHolder(binding)
             }
 
         }
